@@ -1,0 +1,19 @@
+register:
+    rabbitmq:
+        exchange: register.exchange
+        queue: register.queue
+        routingkey: register.routingkey
+spring:
+    rabbitmq:
+        host: localhost
+        password: guest
+        port: 5672
+        username: guest
+    h2:
+        console:
+            enabled: true
+    datasource:
+        url: jdbc:h2:mem:testdb
+        driverClassName: org.h2.Driver
+        username: sa
+        password: password

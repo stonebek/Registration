@@ -1,0 +1,23 @@
+register:
+  rabbitmq:
+    exchange: register.exchange
+    queue: register.queue
+    routingkey: register.routingkey
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: rrandomtestuser@gmail.com
+    password: randomuser123
+    properties:
+      mail:
+        smtp:
+          auth:
+            enable: true
+          starttls:
+            enable: true
