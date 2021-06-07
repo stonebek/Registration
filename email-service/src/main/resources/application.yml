@@ -1,0 +1,29 @@
+spring:
+    rabbitmq:
+        host: localhost
+        password: guest
+        port: 5672
+        username: guest
+    h2:
+        console:
+            enabled: true
+    datasource:
+        url: jdbc:h2:mem:testdb
+        driverClassName: org.h2.Driver
+        username: sa
+        password: password
+    mail:
+        host: smtp.gmail.com
+        port: 587
+        username: rrandomtestuser@gmail.com
+        password: randomuser123
+        properties:
+            mail:
+                smtp:
+                    auth:
+                        enable: true
+                    starttls:
+                        enable: true
+email:
+    rabbitmq:
+        queue: email.queue

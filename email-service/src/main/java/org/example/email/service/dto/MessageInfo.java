@@ -1,4 +1,4 @@
-package org.example.verification.dto;
+package org.example.email.service.dto;
 
 import lombok.Value;
 
