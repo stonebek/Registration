@@ -2,7 +2,6 @@ package org.example.email.service.listener;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
-import java.util.Random;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.email.service.dto.MessageInfo;
@@ -22,11 +21,16 @@ public class EmailRabbitListener {
 
   @RabbitListener(queues = "${email.rabbitmq.queue}")
   public void receive(Message message) throws IOException {
-    UserInfo userInfo = objectMapper.readValue(message.getBody(), UserInfo.class);
-    log.info("Received message {}", userInfo);
+    try {
+      UserInfo userInfo = objectMapper.readValue(message.getBody(), UserInfo.class);
+      log.info("Received message {}", userInfo);
 
-    String messageBody = String.format("Dear %s, Your request was %s", userInfo.getFullName(), userInfo.getStatus());
-    MessageInfo messageInfo = new MessageInfo(userInfo.getEmail(), "Notification", messageBody);
-    emailService.sendEmail(messageInfo);
+      String messageBody = String
+          .format("Dear %s, Your request was %s", userInfo.getFullName(), userInfo.getStatus());
+      MessageInfo messageInfo = new MessageInfo(userInfo.getEmail(), "Notification", messageBody);
+      emailService.sendEmail(messageInfo);
+    } catch  (IOException e) {
+      log.error("Failed to deserialized message {}", e.getMessage());
+    }
   }
 }

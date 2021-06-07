@@ -18,13 +18,16 @@ public class EmailServiceImpl implements EmailService {
 
   @Override
   public void sendEmail(MessageInfo messageInfo) {
+    if(messageInfo == null) {
+      throw new IllegalArgumentException();
+    }
     SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
     simpleMailMessage.setTo(messageInfo.getReceiver());
     simpleMailMessage.setSubject(messageInfo.getSubject());
     simpleMailMessage.setText(messageInfo.getBody());
     try {
 //      javaMailSender.send(simpleMailMessage);
-//      заглушка для отправки email с результатами проверки от стороннего сервиса
+//      заглушка для отправки email с результатами проверки от verification сервиса
       log.info("Email has been sent");
     } catch (MailException mailException) {
       log.error("Email not sent", mailException);
